@@ -1,13 +1,21 @@
-// const value = 100; //присутність лексичного оточення
-// function add(a, b) {
-//   return a + b + value;
-// }
-// function mult(a, b) {
-//   return a * b;
-// }
-// export { add, mult };
-//в одному  файлі може бути тільки один дефолтний експорт, при його імпорті
-//можна використовувати любу назву. Синтаксис слідуючий:
-// const a = 60;
-// export default a;
-// в одному файлі може бути і дефолтний і іменований експорт
+import Player from '@vimeo/player';
+import throttle from 'lodash.throttle';
+
+const CURRENT_TIME = 'videoplayer-current-time';
+
+const iframe = document.querySelector('iframe');
+
+const player = new Player(iframe);
+
+player.on('timeupdate', throttle(onPlay, 1000));
+
+function onPlay({ seconds }) {
+  localStorage.setItem(CURRENT_TIME, seconds);
+}
+setCurrentTime();
+function setCurrentTime() {
+  if (!localStorage.getItem(CURRENT_TIME)) {
+    return;
+  }
+  player.setCurrentTime(localStorage.getItem(CURRENT_TIME));
+}

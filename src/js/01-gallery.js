@@ -3,18 +3,36 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { galleryItems } from './gallery-items';
 
-// Change code below this line
+const galleryContainer = document.querySelector('.gallery');
+console.log(galleryContainer);
+
+function renderListGalary(galleryItems) {
+  return galleryItems
+    .map(
+      ({ preview, original, description }) =>
+        `<li class="gallery__item">
+        <a class="gallery__link" href="${original}">
+            <img
+            class="gallery__image"
+            data-source="${original}"
+            src="${preview}"
+            alt="${description}"
+            />
+        </a>
+    </li>`
+    )
+    .join('');
+}
+
+galleryContainer.insertAdjacentHTML(
+  'beforeend',
+  renderListGalary(galleryItems)
+);
+
+let gallery = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 300,
+});
 
 console.log(galleryItems);
-// import { add as fnAdd, mult } from './02-video';
-// const add = 5;
-// console.log(fnAdd(4, 5));
-// console.log(add);
-// console.log(mult(3, 5));
-
-// якщо треба імпортувати все, то тоді шснує такий синтаксис:
-// import * as data from './02-video';
-// console.log(data); //це вже буде обьєкт з імпортом
-// console.log(data.add(4, 5)); // 109 достукатись до потрібноі функціі
-// import value from './02-video';//це імпортується дефольний експорт
-// console.log(value); //60
