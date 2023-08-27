@@ -29,7 +29,7 @@ galleryContainer.insertAdjacentHTML(
   renderListGalary(galleryItems)
 );
 
-let gallery = new SimpleLightbox('.gallery a', {
+new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionPosition: 'bottom',
   captionDelay: 300,

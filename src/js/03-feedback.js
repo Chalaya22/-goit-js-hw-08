@@ -10,8 +10,13 @@ formEl.addEventListener('input', throttle(formInputHendler, 500));
 
 function formSubmitHendler(evt) {
   evt.preventDefault();
+  if (!evt.target.email.value || !evt.target.message.value) {
+    alert('Enter all data');
+    return;
+  }
   const formData = new FormData(formEl);
-  formData.forEach((name, value) => console.log(name, value));
+  formData.forEach((value, name) => console.log(value, name));
+  evt.target.reset();
   localStorage.removeItem(STORAGE_KEY);
 }
 
